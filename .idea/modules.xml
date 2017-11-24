@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/merchant-client/merchant-client.iml" filepath="$PROJECT_DIR$/merchant-client/merchant-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/merchant-domain/merchant-domain.iml" filepath="$PROJECT_DIR$/merchant-domain/merchant-domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/merchant-microservice.iml" filepath="$PROJECT_DIR$/merchant-microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/merchant-object/merchant-object.iml" filepath="$PROJECT_DIR$/merchant-object/merchant-object.iml" />
+      <module fileurl="file://$PROJECT_DIR$/merchant-restapi/merchant-restapi.iml" filepath="$PROJECT_DIR$/merchant-restapi/merchant-restapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/merchant-web/merchant-web.iml" filepath="$PROJECT_DIR$/merchant-web/merchant-web.iml" />
+    </modules>
+  </component>
+</project>
