@@ -14,6 +14,8 @@
         <module>merchant-restapi</module>
         <module>merchant-web</module>
         <module>merchant-client</module>
+        <module>merchant-sso</module>
+        <module>merchant-security</module>
     </modules>
 
     <properties>

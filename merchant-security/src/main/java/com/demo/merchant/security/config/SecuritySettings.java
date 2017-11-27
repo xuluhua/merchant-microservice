@@ -1,4 +1,4 @@
-package com.demo.merchant.web.config;
+package com.demo.merchant.security.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

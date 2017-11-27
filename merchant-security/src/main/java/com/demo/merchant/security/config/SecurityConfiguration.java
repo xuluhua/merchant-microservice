@@ -1,4 +1,4 @@
-package com.demo.merchant.web.config;
+package com.demo.merchant.security.config;
 
 import com.demo.merchant.client.service.RoleFuture;
 import org.springframework.beans.factory.annotation.Autowired;

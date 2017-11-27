@@ -1,9 +1,9 @@
-package com.demo.merchant.web.config;
+package com.demo.merchant.security.config;
 
 import com.demo.merchant.client.service.RoleFuture;
-import com.demo.merchant.client.util.CommonUtils;
 import com.demo.merchant.object.ResourceQo;
 import com.demo.merchant.object.RoleQo;
+import com.demo.merchant.security.util.CommonUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.slf4j.Logger;

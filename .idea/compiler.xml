@@ -10,6 +10,8 @@
         <module name="merchant-domain" />
         <module name="merchant-object" />
         <module name="merchant-restapi" />
+        <module name="merchant-security" />
+        <module name="merchant-sso" />
         <module name="merchant-web" />
       </profile>
     </annotationProcessing>
@@ -19,6 +21,8 @@
       <module name="merchant-microservice" target="1.8" />
       <module name="merchant-object" target="1.8" />
       <module name="merchant-restapi" target="1.8" />
+      <module name="merchant-security" target="1.8" />
+      <module name="merchant-sso" target="1.8" />
       <module name="merchant-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>

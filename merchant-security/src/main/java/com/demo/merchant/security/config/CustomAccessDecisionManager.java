@@ -1,4 +1,4 @@
-package com.demo.merchant.web.config;
+package com.demo.merchant.security.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.demo.merchant.web.config;
+package com.demo.merchant.security.config;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.access.SecurityMetadataSource;

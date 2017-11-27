@@ -7,6 +7,8 @@
       <module fileurl="file://$PROJECT_DIR$/merchant-microservice.iml" filepath="$PROJECT_DIR$/merchant-microservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/merchant-object/merchant-object.iml" filepath="$PROJECT_DIR$/merchant-object/merchant-object.iml" />
       <module fileurl="file://$PROJECT_DIR$/merchant-restapi/merchant-restapi.iml" filepath="$PROJECT_DIR$/merchant-restapi/merchant-restapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/merchant-security/merchant-security.iml" filepath="$PROJECT_DIR$/merchant-security/merchant-security.iml" />
+      <module fileurl="file://$PROJECT_DIR$/merchant-sso/merchant-sso.iml" filepath="$PROJECT_DIR$/merchant-sso/merchant-sso.iml" />
       <module fileurl="file://$PROJECT_DIR$/merchant-web/merchant-web.iml" filepath="$PROJECT_DIR$/merchant-web/merchant-web.iml" />
     </modules>
   </component>
