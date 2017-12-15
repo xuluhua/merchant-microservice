@@ -12,7 +12,6 @@ import java.util.List;
 
 public class SecurityUser extends UserQo implements UserDetails
 {
-
     private static final long serialVersionUID = 1L;
     public SecurityUser(UserQo user) {
         if(user != null)

@@ -13,8 +13,8 @@ import java.util.List;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long>, JpaSpecificationExecutor<Role> {
-    @Query("select u from Role u " +
-            "left join u.resources r " +
+    @Query("select o from Role o " +
+            "left join o.resources r " +
             "where r.id = :id")
     List<Role> findByResourceId(@Param("id") Long id);
 }

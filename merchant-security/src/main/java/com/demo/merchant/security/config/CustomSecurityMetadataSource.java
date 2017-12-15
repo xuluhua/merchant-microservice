@@ -64,7 +64,7 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
 
         Collection<ConfigAttribute> roles = new ArrayList<>();//有权限的角色列表
 
-        //检查每个角色的资源，如果跟请求资源匹配，则加入角色列表。然后提供给决断器决断
+        //检查每个角色的资源，如果跟请求资源匹配，则加入角色列表。为后面权限检查提供依据
         if(roleQoList != null && roleQoList.size() > 0) {
             for (RoleQo roleQo : roleQoList) {//循环角色列表
                 List<ResourceQo> resourceQos = roleQo.getResources();

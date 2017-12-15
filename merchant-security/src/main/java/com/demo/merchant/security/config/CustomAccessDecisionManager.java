@@ -24,22 +24,22 @@ public class CustomAccessDecisionManager implements AccessDecisionManager {
             return;
         }
 
-        //角色资源配置( public Collection<ConfigAttribute> getAttributes(Object object))
+        //从CustomSecurityMetadataSource(getAttributes)中获取请求资源所需的角色集合
         Iterator<ConfigAttribute> iterator = configAttributes.iterator();
 
-        while (iterator.hasNext()) {//循环资源要求的角色(具有权限的角色)
+        while (iterator.hasNext()) {
             ConfigAttribute configAttribute = iterator.next();
-            //need role
+            //对资源访问具有权限的角色
             String needRole = configAttribute.getAttribute();
             logger.info("具有权限的角色：" + needRole);
-            //user roles 再循环用户拥有的角色，跟资源要求的角色进行比较，如果角色相同则具有权限
+            //在用户拥有的权限中检查是否具有匹配的角色
             for (GrantedAuthority ga : authentication.getAuthorities()) {
                 if (needRole.equals(ga.getAuthority())) {
                     return;
                 }
             }
         }
-        //如果循环嵌套中没有互相匹配的角色，则用户没有权限
+        //如果所有用户角色都不匹配，则用户没有权限
         throw new AccessDeniedException("Cannot Access!");
     }
 

@@ -4,6 +4,7 @@ import com.demo.merchant.client.service.UserRestService;
 import com.demo.merchant.object.*;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 
@@ -17,6 +18,9 @@ public abstract class BaseController {
 
     @Autowired
     private UserRestService userService;
+
+    @Value("${spring.application.name}")
+    private String serviceName;
 
     public List<ModelQo> getModels(String userName, HttpServletRequest request){
         //本系统请求前缀（域名）
@@ -36,7 +40,7 @@ public abstract class BaseController {
                 String link = resource.getModel().getKind().getLink();//用户权限中的分类顶级菜单链接：http://localhost:8081/
                 //获取模块列表，去重
                 if(! modelIds.contains(resource.getModel().getId())
-                        && pathMatcher.match(basePath + "/**", link)){
+                        && pathMatcher.match(serviceName, link)){
                     modelList.add(resource.getModel());
                     modelIds.add(resource.getModel().getId());
                 }

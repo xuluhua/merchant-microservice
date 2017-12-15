@@ -47,16 +47,17 @@
                                 <div class="icon-box" >
                                     <div class="new-icon" th:each="kind:${kinds}">
                                         <div class="icon-pic">
-                                            <p><a th:href="${kind.link}" class="linka"  ><img src="/images/home/BigIconFirm.png" /></a></p>
+                                            <p><a th:href="${'javascript:gotoService(&quot;'+kind.link+'&quot;, &quot; &quot;);'}" class="linka"  ><img src="/images/home/BigIconFirm.png" /></a></p>
                                         </div>
+
                                         <div class="icon-txt">
                                             <dl>
                                                 <dt>
-                                                <p><a th:href="${kind.link}" class="linka" th:text="${kind.name}"></a></p>
+                                                <p><a th:href="${'javascript:gotoService(&quot;'+kind.link+'&quot;, &quot; &quot;);'}" class="linka" th:text="${kind.name}"></a></p>
                                                 <span><img src="/images/home/FourStar.jpg" /></span>
                                                 </dt>
                                                 <dd>
-                                                    <a th:href="${kind.link}" class="linka" th:text="${kind.name}"></a>
+                                                    <a th:href="${'javascript:gotoService(&quot;'+kind.link+'&quot;, &quot; &quot;);'}" class="linka" th:text="${kind.name}"></a>
                                                 </dd>
                                             </dl>
                                         </div>
@@ -81,6 +82,14 @@
             }
         });
     });
+
+    function gotoService(name, follow){
+        $.get("./service/" + name,{ts:new Date().getTime()},function(data){
+            var url = data;
+            if(follow) url += follow;
+            window.open(url, "_top");
+        });
+    }
 </script>
 </body>
 </html>

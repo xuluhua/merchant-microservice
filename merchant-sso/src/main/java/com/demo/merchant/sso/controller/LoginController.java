@@ -8,9 +8,12 @@ import com.demo.merchant.object.UserQo;
 import com.demo.merchant.sso.service.ImageCode;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -22,16 +25,15 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 @Controller
 public class LoginController {
     @Autowired
     private UserFuture userFuture;
+    @Autowired
+    private DiscoveryClient discoveryClient;
 
     @RequestMapping("/login")
     public String login(){
@@ -111,5 +113,24 @@ public class LoginController {
             session.removeAttribute("simpleCaptcha");
             return "1";
         }
+    }
+
+
+    @RequestMapping(value="/service/{name}")
+    @ResponseBody
+    public String getService(@PathVariable String name) {
+        List<ServiceInstance> list = discoveryClient.getInstances(name);
+        String serviceUri = "./";
+        if(list != null && list.size() > 0){
+            if(list.size() > 1) {
+                Random random = new Random();
+                ServiceInstance service = list.get(random.nextInt(list.size() - 1));
+                serviceUri = service.getUri().toString();
+            }else {
+                ServiceInstance service = list.get(0);
+                serviceUri = service.getUri().toString();
+            }
+        }
+        return serviceUri;
     }
 }

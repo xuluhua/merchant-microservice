@@ -60,8 +60,4 @@ securityconfig:
   logoutsuccssurl: /tosignout
   permitall: /test/**,/hystrix**
   deniedpage: /deny
-  #已使用数据库配置
-  urlroles: /**/new/** = admin;
-            /**/edit/** = admin,editor;
-            /**/delete/** = admin
   ssohome: http://localhost:8000/

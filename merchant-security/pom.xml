@@ -12,7 +12,6 @@
     <artifactId>merchant-security</artifactId>
 
     <dependencies>
-
         <dependency>
             <groupId>com.demo</groupId>
             <artifactId>merchant-client</artifactId>
