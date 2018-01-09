@@ -31,20 +31,24 @@ public class ResourceService {
     private CacheComponent cacheComponent;
 
     public void save(Resource resource){
+        //删除缓存
+        if(CommonUtils.isNotNull(resource.getId())){
+            String key = resource.getId().toString();
+            cacheComponent.remove(Constant.MERCHANT_CENTER_RESOURCE_ID, key);//删除原有缓存
+        }
         resourceRepository.save(resource);
         //保存缓存
         if(CommonUtils.isNotNull(resource.getId())){
             String key = resource.getId().toString();
-            cacheComponent.remove(Constant.MERCHANT_CENTER_RESOURCE_ID, key);//删除原有缓存
             cacheComponent.put(Constant.MERCHANT_CENTER_RESOURCE_ID, key, resource, 12);//增加缓存，保存12秒
         }
     }
 
     public void delete(Long id){
-        Resource resource = resourceRepository.findOne(id);
-        resourceRepository.delete(resource);
         //删除缓存
         cacheComponent.remove(Constant.MERCHANT_CENTER_RESOURCE_ID, id.toString());
+
+        resourceRepository.delete(id);
     }
 
     public List<Resource> findAll(){

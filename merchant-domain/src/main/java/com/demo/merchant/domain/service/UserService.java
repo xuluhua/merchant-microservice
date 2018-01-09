@@ -32,19 +32,23 @@ public class UserService {
     private CacheComponent cacheComponent;
 
     public void save(User user){
+        //删除缓存
+        if(CommonUtils.isNotNull(user.getId())){
+            String key = user.getId().toString();
+            cacheComponent.remove(Constant.MERCHANT_CENTER_USER_ID, key);//删除原有缓存
+        }
         userRepository.save(user);
         //保存缓存
         if(CommonUtils.isNotNull(user.getId())){
             String key = user.getId().toString();
-            cacheComponent.remove(Constant.MERCHANT_CENTER_USER_ID, key);//删除原有缓存
             cacheComponent.put(Constant.MERCHANT_CENTER_USER_ID, key, user, 12);//增加缓存，保存12秒
         }
     }
 
     public void delete(Long id){
-        userRepository.delete(id);
         //删除缓存
         cacheComponent.remove(Constant.MERCHANT_CENTER_USER_ID, id.toString());
+        userRepository.delete(id);
     }
 
     public List<User> findAll(){

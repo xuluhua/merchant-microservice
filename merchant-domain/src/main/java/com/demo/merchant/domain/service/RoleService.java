@@ -31,20 +31,24 @@ public class RoleService {
     private CacheComponent cacheComponent;
 
     public void save(Role role){
+        //删除缓存
+        if(CommonUtils.isNotNull(role.getId())){
+            String key = role.getId().toString();
+            cacheComponent.remove(Constant.MERCHANT_CENTER_ROLE_ID, key);//删除原有缓存
+        }
         roleRepository.save(role);
         //保存缓存
         if(CommonUtils.isNotNull(role.getId())){
             String key = role.getId().toString();
             cacheComponent.remove(Constant.MERCHANT_CENTER_ROLE_ID, key);//删除原有缓存
-            cacheComponent.put(Constant.MERCHANT_CENTER_ROLE_ID, key, role, 12);//增加缓存，保存12秒
         }
     }
 
     public void delete(Long id){
-        Role role = roleRepository.findOne(id);
-        roleRepository.delete(role);
         //删除缓存
         cacheComponent.remove(Constant.MERCHANT_CENTER_ROLE_ID, id.toString());
+
+        roleRepository.delete(id);
     }
 
     public List<Role> findAll(){

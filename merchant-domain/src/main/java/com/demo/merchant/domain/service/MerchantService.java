@@ -32,20 +32,24 @@ public class MerchantService {
     private CacheComponent cacheComponent;
 
     public void save(Merchant merchant){
+        //删除缓存
+        if(!StringUtils.isEmpty(merchant.getId())){
+            String key = merchant.getId().toString();
+            cacheComponent.remove(Constant.MERCHANT_CENTER_MERCHANT_ID, key);//删除原有缓存
+        }
         merchantRepository.save(merchant);
         //保存缓存
         if(!StringUtils.isEmpty(merchant.getId())){
             String key = merchant.getId().toString();
-            cacheComponent.remove(Constant.MERCHANT_CENTER_MERCHANT_ID, key);//删除原有缓存
             cacheComponent.put(Constant.MERCHANT_CENTER_MERCHANT_ID, key, merchant, 12);//增加缓存，保存12秒
         }
     }
 
     public void delete(Long id){
-        Merchant merchant = merchantRepository.findOne(id);
-        merchantRepository.delete(merchant);
         //删除缓存
         cacheComponent.remove(Constant.MERCHANT_CENTER_MERCHANT_ID, id.toString());
+
+        merchantRepository.delete(id);
     }
 
     public List<Merchant> findAll(){

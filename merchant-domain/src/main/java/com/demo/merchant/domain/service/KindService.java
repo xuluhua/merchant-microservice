@@ -31,20 +31,24 @@ public class KindService {
     private CacheComponent cacheComponent;
 
     public void save(Kind kind){
+        //删除缓存
+        if(CommonUtils.isNotNull(kind.getId())){
+            String key = kind.getId().toString();
+            cacheComponent.remove(Constant.MERCHANT_CENTER_KIND_ID, key);//删除原有缓存
+        }
         kindRepository.save(kind);
         //保存缓存
         if(CommonUtils.isNotNull(kind.getId())){
             String key = kind.getId().toString();
-            cacheComponent.remove(Constant.MERCHANT_CENTER_KIND_ID, key);//删除原有缓存
             cacheComponent.put(Constant.MERCHANT_CENTER_KIND_ID, key, kind, 12);//增加缓存，保存12秒
         }
     }
 
     public void delete(Long id){
-        Kind kind = kindRepository.findOne(id);
-        kindRepository.delete(kind);
         //删除缓存
         cacheComponent.remove(Constant.MERCHANT_CENTER_KIND_ID, id.toString());
+
+        kindRepository.delete(id);
     }
 
     public List<Kind> findAll(){

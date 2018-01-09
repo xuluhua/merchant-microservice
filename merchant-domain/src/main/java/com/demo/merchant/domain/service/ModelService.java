@@ -32,20 +32,24 @@ public class ModelService {
     private CacheComponent cacheComponent;
 
     public void save(Model model){
+        //删除缓存
+        if(!StringUtils.isEmpty(model.getId())){
+            String key = model.getId().toString();
+            cacheComponent.remove(Constant.MERCHANT_CENTER_MODEL_ID, key);//删除原有缓存
+        }
         modelRepository.save(model);
         //保存缓存
         if(!StringUtils.isEmpty(model.getId())){
             String key = model.getId().toString();
-            cacheComponent.remove(Constant.MERCHANT_CENTER_MODEL_ID, key);//删除原有缓存
             cacheComponent.put(Constant.MERCHANT_CENTER_MODEL_ID, key, model, 12);//增加缓存，保存12秒
         }
     }
 
     public void delete(Long id){
-        Model model = modelRepository.findOne(id);
-        modelRepository.delete(model);
         //删除缓存
         cacheComponent.remove(Constant.MERCHANT_CENTER_MODEL_ID, id.toString());
+
+        modelRepository.delete(id);
     }
 
     public List<Model> findAll(){
