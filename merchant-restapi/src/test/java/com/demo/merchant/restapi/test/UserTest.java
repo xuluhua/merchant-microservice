@@ -46,7 +46,7 @@ public class UserTest {
     public void insertData(){
         Kind kind = new Kind();
         kind.setName("商家系统");
-        kind.setLink("http://localhost:8081/");
+        kind.setLink("merchantweb");
         kindService.save(kind);
         Assert.notNull(kind.getId(), "create kind error");
 

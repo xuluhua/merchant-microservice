@@ -23,11 +23,6 @@ public abstract class BaseController {
     private String serviceName;
 
     public List<ModelQo> getModels(String userName, HttpServletRequest request){
-        //本系统请求前缀（域名）
-        String url = request.getRequestURL().toString();
-        String path = request.getServletPath();
-        String basePath = url.replace(path, "");//http://localhost:8081
-
         //根据登录用户获取用户对象
         String json =  userService.findByName(userName);
         UserQo user = new Gson().fromJson(json, UserQo.class);
@@ -37,7 +32,7 @@ public abstract class BaseController {
         List<Long> modelIds = new ArrayList<>();
         for(RoleQo role : user.getRoles()){
             for(ResourceQo resource : role.getResources()){
-                String link = resource.getModel().getKind().getLink();//用户权限中的分类顶级菜单链接：http://localhost:8081/
+                String link = resource.getModel().getKind().getLink();//分类顶级菜单链接
                 //获取模块列表，去重
                 if(! modelIds.contains(resource.getModel().getId())
                         && pathMatcher.match(serviceName, link)){
